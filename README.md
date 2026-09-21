@@ -6,7 +6,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+# Praktikum Pemrograman Web - Laravel
 
+## Deskripsi Singkat
+Proyek ini merupakan repositori hasil praktikum mata kuliah Pemrograman Web menggunakan framework Laravel. Proyek ini dikembangkan oleh Naufal Allam, mahasiswa program studi D4 Sistem Informasi Kota Cerdas di Politeknik Negeri Banjarmasin.
+
+## Langkah Menjalankan Proyek
+Untuk menjalankan proyek ini di komputer lokal, pastikan Anda telah menginstal PHP dan Composer. Setelah melakukan *clone* pada repositori, ikuti langkah-langkah berikut melalui terminal:
 ## About Laravel
 
 LARAVEL is a WEB application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. LARAVEL takes the pain out of development by easing common tasks used in many web projects, such as:
