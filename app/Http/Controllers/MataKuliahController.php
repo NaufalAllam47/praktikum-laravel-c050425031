@@ -12,8 +12,7 @@ class MataKuliahController extends Controller
      */
     public function index()
     {
-        $matakuliahs = Matakuliah::with('dosen')->get();
-        return view('matakuliah.index', compact('matakuliahs'));
+        return 'Halaman Daftar Mata Kuliah';
     }
 
     /**
@@ -44,9 +43,9 @@ class MataKuliahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Matakuliah $matakuliah)
     {
-        //
+        return "Nama Matakuliah: {$matakuliah->nama_mk}";
     }
 
     /**
