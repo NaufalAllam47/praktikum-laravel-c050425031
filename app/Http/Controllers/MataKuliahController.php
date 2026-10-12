@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\MataKuliah;
 
 class MataKuliahController extends Controller
 {
@@ -12,7 +13,8 @@ class MataKuliahController extends Controller
      */
     public function index()
     {
-        return 'Halaman Daftar Mata Kuliah';
+        $matakuliah = MataKuliah::all();
+        return view ('matakuliah.index', compact('matakuliah'));
     }
 
     /**
@@ -45,7 +47,7 @@ class MataKuliahController extends Controller
      */
     public function show(Matakuliah $matakuliah)
     {
-        return "Nama Matakuliah: {$matakuliah->nama_mk}";
+        return view('matakuliah.show', compact('matakuliah'));
     }
 
     /**

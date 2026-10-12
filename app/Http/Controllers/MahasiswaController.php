@@ -21,7 +21,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return 'create: form tambah mahasiswa';
+        //
     }
 
     /**
@@ -29,7 +29,8 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        return 'store: simpan data baru';
+        Mahasiswa::create($request->only(['nim', 'nama', 'email', 'prodi', 'semester']));
+        return redirect()->route('mahasiswa.index')->with('pesan', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -37,30 +38,33 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
+        $mahasiswa->load('nilai.matakuliah'); // eager load relasi
         return view('mahasiswa.show', compact('mahasiswa'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Mahasiswa $mahasiswa)
     {
-        return "edit: form edit mahasiswa id $id";
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        return "update: perbarui data id $id";
+        $mahasiswa->update($request->only(['nim', 'nama', 'email', 'prodi', 'semester']));
+        return redirect()->route('mahasiswa.index')->with('pesan', 'Data berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Mahasiswa $mahasiswa)
     {
-        return "destroy: hapus data id $id";
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswa.index')->with('pesan', 'Data berhasil dihapus');
     }
 }
