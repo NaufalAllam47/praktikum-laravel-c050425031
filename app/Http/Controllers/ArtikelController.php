@@ -12,7 +12,8 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        //
+         $artikel = Artikel::latest()->paginate(10);
+        return view('artikel.index', compact('artikel'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ArtikelController extends Controller
      */
     public function create()
     {
-        //
+        return view('artikel.create');
     }
 
     /**
@@ -28,7 +29,15 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         Artikel::create([
+        'user_id' => auth()->id() ?? 1, // sementara default user_id = 1 sebelum autentikasi aktif pada Bagian II
+        'judul' => $request->judul,
+        'slug' => \Illuminate\Support\Str::slug($request->judul),
+        'isi' => $request->isi,
+        'status' => $request->status,
+    ]);
+
+    return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil ditambahkan');
     }
 
     /**
@@ -36,7 +45,7 @@ class ArtikelController extends Controller
      */
     public function show(Artikel $artikel)
     {
-        //
+        return view('artikel.show', compact('artikel'));
     }
 
     /**
@@ -44,7 +53,7 @@ class ArtikelController extends Controller
      */
     public function edit(Artikel $artikel)
     {
-        //
+        return view('artikel.edit', compact('artikel'));
     }
 
     /**
@@ -52,7 +61,14 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, Artikel $artikel)
     {
-        //
+        $artikel->update([
+        'judul' => $request->judul,
+        'slug' => \Illuminate\Support\Str::slug($request->judul),
+        'isi' => $request->isi,
+        'status' => $request->status,
+    ]);
+
+    return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil diperbarui');
     }
 
     /**
@@ -60,6 +76,7 @@ class ArtikelController extends Controller
      */
     public function destroy(Artikel $artikel)
     {
-        //
+        $artikel->delete();
+        return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil dihapus');
     }
 }
