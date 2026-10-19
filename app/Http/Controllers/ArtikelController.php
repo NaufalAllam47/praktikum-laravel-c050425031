@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Artikel;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreArtikelRequest;
+use app\Http\Requests\UpdateArtikelRequest;
 
 class ArtikelController extends Controller
 {
@@ -27,17 +29,14 @@ class ArtikelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-         Artikel::create([
-        'user_id' => auth()->id() ?? 1, // sementara default user_id = 1 sebelum autentikasi aktif pada Bagian II
-        'judul' => $request->judul,
-        'slug' => \Illuminate\Support\Str::slug($request->judul),
-        'isi' => $request->isi,
-        'status' => $request->status,
-    ]);
+    public function store(StoreArtikelRequest $request)
+    {   
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['judul']);
+        $data['user_id'] = auth()->id() ?? 1; // sementara
+        Artikel::create($request->validated() + ['user_id' => auth()->id()]);
 
-    return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil ditambahkan');
+        return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil ditambahkan');
     }
 
     /**
@@ -59,16 +58,13 @@ class ArtikelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Artikel $artikel)
+    public function update(UpdateArtikelRequest $request, Artikel $artikel)
     {
-        $artikel->update([
-        'judul' => $request->judul,
-        'slug' => \Illuminate\Support\Str::slug($request->judul),
-        'isi' => $request->isi,
-        'status' => $request->status,
-    ]);
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['judul']);
+        $artikel->update($data);
 
-    return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil diperbarui');
+        return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil diperbarui');
     }
 
     /**

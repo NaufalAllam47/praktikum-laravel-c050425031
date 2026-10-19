@@ -9,6 +9,7 @@ use App\Http\Controllers\SapaController;
 use App\Http\Controllers\StatistikMahasiswaController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\QueryBuilderDemoController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -107,3 +108,17 @@ Route::get('/demo/mahasiswa/{id}/ubah', [
 Route::get('/demo/mahasiswa/{id}/hapus', [
     QueryBuilderDemoController::class, 'hapus'
 ]);
+
+Route::resource('artikel', ArtikelController::class);
+
+Route::get('/register', [AuthController::class, 'formRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/login', [AuthController::class, 'formLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::resource('artikel', ArtikelController::class)->only(['index', 'show']);
+Route::middleware('auth')->group(function () {
+Route::resource('artikel', ArtikelController::class)->except(['index', 'show']);
+});
