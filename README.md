@@ -8,7 +8,7 @@
 </p>
 
 ## Deskripsi Singkat
-Proyek ini merupakan repositori hasil praktikum mata kuliah Pemrograman Web menggunakan framework Laravel. Proyek ini dikembangkan oleh Naufal Allam, mahasiswa program studi D4 Sistem Informasi Kota Cerdas di Politeknik Teknik Banjarmasin.
+Proyek ini merupakan repositori hasil praktikum mata kuliah Pemrograman Web menggunakan framework LARAVEL. Proyek ini dikembangkan oleh Naufal Allam, mahasiswa program studi D4 Sistem Informasi Kota Cerdas di Politeknik Teknik Banjarmasin.
 
 ## Langkah Menjalankan Proyek
 Untuk menjalankan proyek ini di komputer lokal, pastikan Anda telah menginstal PHP dan Composer. Ikuti langkah-langkah berikut melalui terminal:
